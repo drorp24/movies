@@ -12,7 +12,7 @@ const moviesAPI = async ({ title, year }) => {
     const movies = await axios.get(endpoint)
     return movies
   } catch (error) {
-    // Needless to say, returning a resolved promise with a RejectWithValue argument here would be better
+    // Returning a resolved promise with a RejectWithValue argument here would be better
     console.error(error)
   }
 }
