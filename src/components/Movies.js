@@ -8,7 +8,7 @@ import Movie from './Movie'
 import Empty from './Empty'
 
 const Movies = () => {
-  const movies = useSelector(store => store.movies.entities)
+  const { entities, loading } = useSelector(store => store.movies)
 
   const useStyles = makeStyles(theme => ({
     root: {
@@ -20,11 +20,11 @@ const Movies = () => {
   }))
   const classes = useStyles()
 
-  if (!movies) return <Progress />
-  if (!movies.length) return <Empty />
+  if (loading === 'pending') return <Progress />
+  if (!entities.length) return <Empty />
   return (
     <div className={classes.root}>
-      {movies.map(movie => (
+      {entities.map(movie => (
         <Movie key={movie.imdbID} movie={movie} />
       ))}
     </div>

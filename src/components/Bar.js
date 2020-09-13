@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { fetchMovies, clear } from '../redux/movies'
@@ -75,9 +75,9 @@ const useStyles = makeStyles(theme => ({
 
 const loadMovies = async (title, year, dispatch) => {
   try {
+    dispatch(clear())
     // This particular dispatch returns a promise, but no need to 'await' for it here.
     // It is the redux thunk that awaits the API return, checks the status and populates the store
-    dispatch(clear())
     dispatch(fetchMovies({ title, year }))
   } catch (error) {
     // I took the liberty to not be bothered with proper error handling
@@ -108,7 +108,6 @@ export default function Bar() {
   }
   const updateYear = ({ target: { value } }) => {
     setYear(value)
-    console.log('year: ', year)
   }
   return (
     <div className={classes.root}>
